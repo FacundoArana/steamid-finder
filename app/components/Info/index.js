@@ -6,14 +6,8 @@ export default function Info(){
   const [steamIds, setSteamIds] = useState(null)
   const [dots, setDots] = useState('');
 
-
-    useEffect(() => {
-      console.log(steamIds)
-    }, [steamIds])
-
-    const get_steamid = async (id) => {        
- 
-        const response = await fetch(`https://steamid-finder-backend.vercel.app/get_steam_id?id=${id}`);
+    const get_steamid = async (profileURL) => {        
+        const response = await fetch(`https://steamid-finder-backend.vercel.app/get_steam_id?id=${profileURL}`);
         const newData = await response.json();
         setSteamIds(newData)
 
@@ -25,14 +19,11 @@ export default function Info(){
       const data = new FormData(e.target)
 
         if (data.has("profile_input")) {
-          const matches = data.get("profile_input").match(regex);
-          if(matches){
-            get_steamid(matches[0])
-          }
+          get_steamid(data.get("profile_input"))
         } 
       
     }
-    
+
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -59,7 +50,7 @@ export default function Info(){
                 <p className="text-sm text-gray-400 ">3. Send your profile and wait</p>
               </div>
               <form onSubmit={handleSubmit} id="profile_form" name="profile_form" className="flex flex-col gap-4 w-full justify-center items-center p-6">
-                <input type="url" className="w-full outline-none  px-2 py-1 xl:w-1/2 text-sm text-center rounded-md" placeholder="www.steam.com/profile"	 id="profile_input" name="profile_input" required minLength="4" size="10" />
+                <input type="url" className="w-full outline-none  px-2 py-1 xl:w-1/2 text-sm text-black text-center rounded-md" placeholder="www.steam.com/profile"	 id="profile_input" name="profile_input" required minLength="4" size="10" />
                 <input type="submit" className="text-[12px] xl:text-[10px] px-6 py-1 border rounded-md font-semibold cursor-pointer text-gray-400 hover:text-white" value="SEND"/>
               </form>
             </div>

@@ -7,7 +7,7 @@ export default function Info(){
   const [dots, setDots] = useState('');
 
     const get_steamid = async (profileURL) => {        
-        const response = await fetch(`https://steamid-finder-backend.vercel.app/get_steam_id?id=${profileURL}`);
+        const response = await fetch(`https://steamid-finder-backend.vercel.app/get_steam_id?steam_url=${profileURL}`);
         const newData = await response.json();
         setSteamIds(newData)
 
